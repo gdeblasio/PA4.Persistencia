@@ -15,10 +15,10 @@ public class PersonJsonFileReader {
     }
     
     public Person read() throws IOException {
-        BufferedReader reader = 
-                new BufferedReader(new FileReader(file));
-        Person person = new Gson().fromJson(reader.readLine(), Person.class);
-        reader.close();
+        Person person;
+        try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
+            person = new Gson().fromJson(reader.readLine(), Person.class);
+        }
         return person;
     }
 }
