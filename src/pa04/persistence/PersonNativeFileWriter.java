@@ -14,11 +14,9 @@ public class PersonNativeFileWriter {
     }
     
     public void write(Person person) throws IOException {
-        FileOutputStream os = new FileOutputStream(file);
-        ObjectOutputStream oos = new ObjectOutputStream(os);
-        oos.writeObject(person);
-        oos.flush();
-        oos.close();
-        os.close();
+        try (FileOutputStream os = new FileOutputStream(file)) {
+            ObjectOutputStream oos = new ObjectOutputStream(os);
+            oos.writeObject(person);
+        }
     }
 }
