@@ -14,9 +14,9 @@ public class PersonJsonFileWriter {
     }
     
     public void write(Person person) throws IOException {
-        FileWriter fw = new FileWriter(file);
-        fw.write(new GsonBuilder().create().toJson(person));
-        fw.close();
+        try (FileWriter fw = new FileWriter(file)) {
+            fw.write(new GsonBuilder().create().toJson(person));
+        }
     }
     
 }
