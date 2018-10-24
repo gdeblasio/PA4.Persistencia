@@ -14,11 +14,11 @@ public class PersonNativeFileReader {
     }
     
     public Person read() throws IOException, ClassNotFoundException {
-        FileInputStream is = new FileInputStream(file);
-        ObjectInputStream ois = new ObjectInputStream(is);
-        Object object = ois.readObject();
-        ois.close();
-        is.close();
+        Object object;
+        try (FileInputStream is = new FileInputStream(file)) {
+            ObjectInputStream ois = new ObjectInputStream(is);
+            object = ois.readObject();
+        }
         return (Person) object;
     }
 }
