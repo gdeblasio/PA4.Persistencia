@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.time.Month;
 import pa04.model.Person;
+import pa04.persistence.PersonJsonFileWriter;
 import pa04.persistence.PersonNativeFileWriter;
 
 public class WriteMain {
@@ -15,6 +16,11 @@ public class WriteMain {
         PersonNativeFileWriter pnfw = new PersonNativeFileWriter(file);
         pnfw.write(person);
         System.out.println("Person " + person.getName() + " saved!");
+        
+        PersonJsonFileWriter pjfw = 
+                new PersonJsonFileWriter(new File("maria.json"));
+        pjfw.write(person);
+        System.out.println("\nPerson " + person.getName() + " saved! (json)");
     }
     
 }
